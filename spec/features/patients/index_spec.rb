@@ -3,10 +3,7 @@ require 'rails_helper'
 RSpec.describe 'patient index page' do 
   
   before(:each) do
-    Hospital.destroy_all
-    Doctor.destroy_all
-    Patient.destroy_all
-    DoctorPatient.destroy_all
+  
 
     @hospital_1 = Hospital.create!(name: "Grey Sloan Memorial Hospital")
     @hospital_2 = Hospital.create!(name: "Seaside Health & Wellness Center")
@@ -18,7 +15,7 @@ RSpec.describe 'patient index page' do
     @patient_1 = Patient.create!(name: "Katie Bryce", age: 24)
     @patient_2 = Patient.create!(name: "Denny Duquette", age: 39)
     @patient_3 = Patient.create!(name: "Rebecca Pope", age: 32)
-    @patient_4 = Patient.create!(name: "Zola Shepherd", age: 22)
+    @patient_4 = Patient.create!(name: "Zola Shepherd", age: 2)
 
     @doctor_patient_1 = DoctorPatient.create!(doctor_id: @doctor_1.id, patient_id: @patient_1.id)
     @doctor_patient_2 = DoctorPatient.create!(doctor_id: @doctor_2.id, patient_id: @patient_2.id)
@@ -34,7 +31,7 @@ RSpec.describe 'patient index page' do
       it 'shows all adult patient names in alphabetical order' do
         visit "/patients"
         save_and_open_page
-        
+
         expect(page).to have_content(@patient_1.name)
         expect(page).to have_content(@patient_2.name)
         expect(page).to have_content(@patient_3.name)

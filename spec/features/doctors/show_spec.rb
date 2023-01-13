@@ -27,7 +27,7 @@ RSpec.describe 'doctor show page' do
     @doctor_patient_5 = DoctorPatient.create!(doctor_id: @doctor_1.id, patient_id: @patient_4.id)
     @doctor_patient_6 = DoctorPatient.create!(doctor_id: @doctor_1.id, patient_id: @patient_3.id)
     @doctor_patient_7 = DoctorPatient.create!(doctor_id: @doctor_3.id, patient_id: @patient_2.id)
-    @doctor_patient_8 = DoctorPatient.create!(doctor_id: @doctor_3.id, patient_id: @patient_4.id)
+    @doctor_patient_8 = DoctorPatient.create!(doctor_id: @doctor_3.id, patient_id: @patient_1.id)
 
   end
 
@@ -66,6 +66,9 @@ RSpec.describe 'doctor show page' do
         expect(page).to_not have_content(@patient_1.name)
         expect(current_path).to eq("/doctors/#{@doctor_1.id}")
        
+        visit "/doctors/#{@doctor_3.id}"
+        expect(page).to have_button("Remove #{@patient_1.name}")
+
       end
 
     end

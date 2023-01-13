@@ -1,7 +1,13 @@
 require 'rails_helper'
 
 RSpec.describe 'doctor show page' do 
+  
   before(:each) do
+    Hospital.destroy_all
+    Doctor.destroy_all
+    Patient.destroy_all
+    DoctorPatient.destroy_all
+
     @hospital_1 = Hospital.create!(name: "Grey Sloan Memorial Hospital")
     @hospital_2 = Hospital.create!(name: "Seaside Health & Wellness Center")
 
@@ -59,7 +65,7 @@ RSpec.describe 'doctor show page' do
         click_button "Remove #{@patient_1.name}"
         expect(page).to_not have_content(@patient_1.name)
         expect(current_path).to eq("/doctors/#{@doctor_1.id}")
-        
+       
       end
 
     end

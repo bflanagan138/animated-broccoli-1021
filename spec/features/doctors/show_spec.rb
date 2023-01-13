@@ -44,9 +44,20 @@ RSpec.describe 'doctor show page' do
 
       it 'shows all of the doctor patitent names' do
         visit "/doctors/#{@doctor_1.id}"
-        save_and_open_page
+      
         expect(page).to have_content(@patient_1.name)
         expect(page).to_not have_content(@patient_2.name)
+      end
+    end
+    
+    describe 'US2' do
+      it 'shows a button to remove a patient from the doctor' do
+        visit "/doctors/#{@doctor_1.id}"
+      
+        expect(page).to have_content(@patient_1.name)
+        click_button "Remove #{@patient_1.name}"
+        expect(page).to_not have_content(@patient_1.name)
+        expect(current_path).to eq("/doctors/#{@doctor_1.id}")
       end
     end
   end
